@@ -22,14 +22,6 @@ test('is_hash should returns false when object is not a table', function()
   assert_equal(false, Hash.is_hash('lua'))
 end)
 
-test('is_hash should returns false when object is working as a array', function()
-  assert_equal(false, Hash.is_hash({ 1, 3, 4 }))
-end)
-
-test('is_hash should returns false when a item in the table does not have key/value', function()
-  assert_equal(false, Hash.is_hash( { a = 1, b = 2, 3 } ))
-end)
-
 test('is_hash should returns true when table is empty', function()
   assert_equal(true, Hash.is_hash({}))
 end)
@@ -75,9 +67,13 @@ test('remove_key should returns false because key does not exist', function()
 end)
 
 test('remove_key should returns true and remove key from table', function()
-  local obj = { a=1, b=2 }
+  local obj = { a=1, b=2, c=false }
+
   assert_equal(true, Hash.remove_key(obj, 'b'))
   assert_equal(nil, obj.b)
+
+  assert_equal(true, Hash.remove_key(obj, 'c'))
+  assert_equal(nil, obj.c)
 end)
 
 test('pick should returns a table with keys passed in second parameter', function()
